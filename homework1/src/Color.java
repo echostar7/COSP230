@@ -37,9 +37,10 @@ public class Color {
 		return blue;
 	} 
 	public static void main(String[] args) {
-
-		Color c1 = new Color("orange",255,50,0);
-		System.out.println("color: "+c1.getName()); //should be orange
+		
+		 
+		Color c1 = new Color("\norange",255,50,0);
+		System.out.println("\ncolor: "+c1.getName()); //should be orange
 		System.out.println("red value: "+c1.getRed()); //should be 255
 		System.out.println("Green value: "+c1.getGreen()); //should be 50
 		System.out.println("Blue value: "+c1.getBlue()); // should be 0
