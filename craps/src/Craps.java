@@ -22,26 +22,21 @@ public class Craps {
 	private static final double INITIAL_BALANCE = 1000.00;
 	private static Scanner sc;
 
-	// plays one game of craps
+	// plays craps until you get tired of it or run out of money.
 	public static void main(String[] args) {
 		sc = new Scanner(System.in);
-		double bank_balance = INITIAL_BALANCE; // Implement Bank Balance
-												// variable and set it to an
-												// initial balance of 1000.00
+		double bankBalance = INITIAL_BALANCE; // Initialize Bank Balance to initial balance
 		double wager = -1; // initialize wager variable
-		while (bank_balance != 0) { // keep playing until you run out of money or sentinel of 0 is passed
-			if (bank_balance == 0) { // if you're out of money you can no longer play.
+		while (bankBalance != 0) { // keep playing until you run out of money or sentinel of 0 is passed
+			if (bankBalance == 0) { // if you're out of money you can no longer play.
 				System.out.println("Sorry, you busted!");
 			}
 			System.out.println("Place your wager. Enter 0  to stop playing."); 
-			// Ask the user for a wager
-			// prior to the first
-			// die being played for
-			// a new game.
+			// Ask the user for a wager prior to the first die being played for a new game.
 			wager = sc.nextDouble(); // set wager from user input
 
 			// check if wager exceeds current bank balance
-			if (wager > bank_balance) {
+			if (wager > bankBalance) {
 				System.out.println("wager is too big and must be limited the the amount of the bank balance, enter a smaller wager:");
 				wager = sc.nextInt();
 			}
@@ -52,7 +47,7 @@ public class Craps {
 			}
 			if (wager == 0) { // check for sentinel "0" 
 				System.out.println("Thanks for playing!"); // display thanks
-				System.out.printf("Your new bank balance is: %f\n", bank_balance);// display bank balance
+				System.out.printf("Your new bank balance is: %f\n", bankBalance);// display bank balance
 				break;
 			}
 
@@ -95,8 +90,8 @@ public class Craps {
 			 new bank balance.*/
 			if (gameStatus == Status.WON) {
 				System.out.println("Player wins");
-				bank_balance = (bank_balance + wager);
-				System.out.printf("Your new bank balance is: %f\n",bank_balance);
+				bankBalance = (bankBalance + wager);
+				System.out.printf("Your new bank balance is: %f\n",bankBalance);
 				chatter(); // display random chatter
 
 			}
@@ -104,8 +99,8 @@ public class Craps {
 			 new bank balance.*/
 			else {
 				System.out.println("Player loses");
-				bank_balance = (bank_balance - wager);
-				System.out.printf("Your new bank balance is: %f\n",bank_balance);
+				bankBalance = (bankBalance - wager);
+				System.out.printf("Your new bank balance is: %f\n",bankBalance);
 				chatter(); // display random chatter
 
 			}
@@ -116,11 +111,11 @@ public class Craps {
 	// “chatter” method gives random responses to the player on completion of
 	// each round 50% of the time. 
 	private static void chatter() {
-		double randomDouble = randomNumbers.nextDouble();
-		int response = randomNumbers.nextInt(3);
-		if (randomDouble >= 0.5) {
+		double randomDouble = randomNumbers.nextDouble(); // get new double between 0 and 1
+		int response = randomNumbers.nextInt(3); // get new int between 0 and 2
+		if (randomDouble >= 0.5) {  
 			
-			switch (response) {
+			switch (response) {  // choose random response
 			case 0:
 				System.out.println("Oh, you're going for broke, huh?");
 				break;
