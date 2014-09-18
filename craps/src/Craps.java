@@ -71,6 +71,7 @@ public class Craps {
 				gameStatus = Status.CONTINUE; // game is not over
 				myPoint = sumOfDice; // remember the point
 				System.out.printf("Point is %d\n", myPoint);
+				chatter(); // display random chatter
 				break; // optional at end of switch
 			} // end switch
 
@@ -108,8 +109,7 @@ public class Craps {
 
 	} // end main
 
-	// “chatter” method gives random responses to the player on completion of
-	// each round 50% of the time. 
+	// Chatter method generates a random response 50% of the time.
 	private static void chatter() {
 		double randomDouble = randomNumbers.nextDouble(); // get new double between 0 and 1
 		int response = randomNumbers.nextInt(3); // get new int between 0 and 2
