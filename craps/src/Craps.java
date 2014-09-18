@@ -124,13 +124,13 @@ public class Craps {
 
 		int response = randomNumbers.nextInt(3);
 		switch (response) {
-		case 1:
+		case 0:
 			System.out.println("Oh, you're going for broke, huh?");
 			break;
-		case 2:
+		case 1:
 			System.out.println("Aw c'mon, take a chance!");
 			break;
-		case 3:
+		case 2:
 			System.out.println("You're up big. Now's the time to cash in your chips!");
 			break;
 		}
