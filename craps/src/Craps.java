@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Craps {
 	// create random number generator for use in method rollDice
 	private static final Random randomNumbers = new Random();
-
 	// enumeration with constants that represent the game status
 	private enum Status {
 		CONTINUE, WON, LOST
@@ -21,25 +20,25 @@ public class Craps {
 
 	// constant representing initial balance
 	private static final double INITIAL_BALANCE = 1000.00;
+	private static Scanner sc;
 
 	// plays one game of craps
 	public static void main(String[] args) {
-		// Create new scanner
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		double bank_balance = INITIAL_BALANCE; // Implement Bank Balance
 												// variable and set it to an
 												// initial balance of 1000.00
-		double wager = -1;  // initialize wager variable
+		double wager = -1; // initialize wager variable
 		while (bank_balance != 0) { // keep playing until you run out of money or sentinel of 0 is passed
-			if (bank_balance == 0) { // if you're out of money you can no longer
-										// play.
+			if (bank_balance == 0) { // if you're out of money you can no longer play.
 				System.out.println("Sorry, you busted!");
 			}
-			System.out.println("Place your wager. Enter 0  to stop playing."); // Ask the user for a wager,  0 triggers game exit.
-														// prior to the first
-														// die being played for
-														// a new game.
-			 wager = sc.nextDouble(); // set wager from user input
+			System.out.println("Place your wager. Enter 0  to stop playing."); 
+			// Ask the user for a wager
+			// prior to the first
+			// die being played for
+			// a new game.
+			wager = sc.nextDouble(); // set wager from user input
 
 			// check if wager exceeds current bank balance
 			if (wager > bank_balance) {
@@ -51,9 +50,9 @@ public class Craps {
 				System.out.println("wager must be greater than zero!");
 				wager = sc.nextInt();
 			}
-			if (wager == 0){
-				System.out.println("Thanks for playing!");
-				System.out.printf("Your new bank balance is: %f\n",bank_balance);
+			if (wager == 0) { // check for sentinel "0" 
+				System.out.println("Thanks for playing!"); // display thanks
+				System.out.printf("Your new bank balance is: %f\n", bank_balance);// display bank balance
 				break;
 			}
 
@@ -67,13 +66,11 @@ public class Craps {
 			case SEVEN: // win with 7 on first roll
 			case YO_LEVEN: // win with 11 on first roll
 				gameStatus = Status.WON;
-				chatter(); // display random chatter
 				break;
 			case SNAKE_EYES: // lose with 2 on first roll
 			case TREY: // lose with 3 on first roll
 			case BOX_CARS: // lose with 12 on first roll
 				gameStatus = Status.LOST;
-				chatter(); // display random chatter
 				break;
 			default: // did not win or lose, so remember point
 				gameStatus = Status.CONTINUE; // game is not over
@@ -94,9 +91,8 @@ public class Craps {
 					gameStatus = Status.LOST;
 			} // end while
 
-			// display won or lost message
-			// add the amount of wager to the bank balance and display his
-			// new bank balance.
+			/* display won message add the amount of wager to the bank balance and display his
+			 new bank balance.*/
 			if (gameStatus == Status.WON) {
 				System.out.println("Player wins");
 				bank_balance = (bank_balance + wager);
@@ -104,7 +100,8 @@ public class Craps {
 				chatter(); // display random chatter
 
 			}
-
+			/* display lost message, subtract the amount of wager to the bank balance and display his
+			 new bank balance.*/
 			else {
 				System.out.println("Player loses");
 				bank_balance = (bank_balance - wager);
@@ -117,27 +114,27 @@ public class Craps {
 	} // end main
 
 	// “chatter” method gives random responses to the player on completion of
-	// each round such as "Oh, you're going for broke, huh?" or
-	// "Aw c'mon, take a chance!" or
-	// "You're up big. Now's the time to cash in your chips!".
-	public static void chatter() {
-
+	// each round 50% of the time. 
+	private static void chatter() {
+		double randomDouble = randomNumbers.nextDouble();
 		int response = randomNumbers.nextInt(3);
-		switch (response) {
-		case 0:
-			System.out.println("Oh, you're going for broke, huh?");
-			break;
-		case 1:
-			System.out.println("Aw c'mon, take a chance!");
-			break;
-		case 2:
-			System.out.println("You're up big. Now's the time to cash in your chips!");
-			break;
+		if (randomDouble >= 0.5) {
+			
+			switch (response) {
+			case 0:
+				System.out.println("Oh, you're going for broke, huh?");
+				break;
+			case 1:
+				System.out.println("Aw c'mon, take a chance!");
+				break;
+			case 2:
+				System.out.println("You're up big. Now's the time to cash in your chips!");
+				break;
+			}
 		}
-
 	}
 
-	// roll dice, calculate sum and display results
+	// "rollDice" method calculates the sum of the roll and display results
 	public static int rollDice() {
 		// pick random die values
 		int die1 = 1 + randomNumbers.nextInt(6); // first die roll
